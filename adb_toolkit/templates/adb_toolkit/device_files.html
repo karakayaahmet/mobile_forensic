@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ device_id }} Dosya ve Klasörler</title>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <!-- Fotoğraflar -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fa-regular fa-image me-2"></i>
+                    <h2 class="mb-0">Fotoğraflar</h2>
+                </div>
+                <div class="card-body" style="height: 30vh; overflow-y: auto;">
+                    <div class="list-group">
+                        {% for file in file_tree.photos %}
+                            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center" onclick="fetchFileDetails('{{ file.name }}')">
+                                <i class="{{ file.icon }} me-2"></i>
+                                {{ file.name }}
+                            </a>
+                        {% empty %}
+                            <div class="list-group-item">Fotoğraf bulunamadı.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Videolar -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fa-solid fa-clapperboard me-2"></i>
+                    <h2 class="mb-0">Videolar</h2>
+                </div>
+                <div class="card-body" style="height: 30vh; overflow-y: auto;">
+                    <div class="list-group">
+                        {% for file in file_tree.videos %}
+                            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center" onclick="fetchFileDetails('{{ file.name }}')">
+                                <i class="{{ file.icon }} me-2"></i>
+                                {{ file.name }}
+                            </a>
+                        {% empty %}
+                            <div class="list-group-item">Video bulunamadı.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <!-- APK Dosyaları -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fa-brands fa-android me-2"></i>
+                    <h2 class="mb-0">APK Dosyaları</h2>
+                </div>
+                <div class="card-body" style="height: 30vh; overflow-y: auto;">
+                    <div class="list-group">
+                        {% for file in file_tree.apks %}
+                            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center" onclick="fetchFileDetails('{{ file.name }}')">
+                                <i class="{{ file.icon }} me-2"></i>
+                                {{ file.name }}
+                            </a>
+                        {% empty %}
+                            <div class="list-group-item">APK dosyası bulunamadı.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Diğer Dosyalar -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex align-items-center">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <h2 class="mb-0">Diğer Dosyalar</h2>
+                </div>
+                <div class="card-body" style="height: 30vh; overflow-y: auto;">
+                    <div class="list-group">
+                        {% for file in file_tree.others %}
+                            <a href="#" class="list-group-item list-group-item-action d-flex align-items-center" onclick="fetchFileDetails('{{ file.name }}')">
+                                <i class="{{ file.icon }} me-2"></i>
+                                {{ file.name }}
+                            </a>
+                        {% empty %}
+                            <div class="list-group-item">Diğer dosyalar bulunamadı.</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function fetchFileDetails(filePath) {
+    const url = `{% url 'file-details' device_id %}?file=${filePath}`;
+    fetch(url)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('file-details').innerHTML = html;
+        })
+        .catch(err => console.log('Error fetching details:', err));
+}
+</script>
+{% endblock %}

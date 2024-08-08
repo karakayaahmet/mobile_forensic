@@ -1,0 +1,29 @@
+{% load static %}
+<div class="card mb-3">
+    <div class="row">
+        <div class="col-4">
+            {% if phone.phone_image %}
+                <img src="{{ phone.phone_image.url }}" class="card-img-top" alt="{{ phone.phone_name }}">
+            {% else %}
+                <img src="{% static 'images/phones/apple.png' %}" class="card-img-top" alt="{{ phone.phone_name }}">
+            {% endif %}
+        </div>
+        <div class="col-8">
+            <div class="card-body">
+                <h5 class="card-title"></h5>
+                    <a href="{% url 'phone_details' phone.slug %}">
+                        <h5>{{ phone.phone_name }}</h5>
+                    </a>
+                    <p class="card-text">{{ phone.phone_model }}</p>
+                    <span>
+                    {% if phone.isUpdated %}
+                        <span class="badge bg-success">Tamamlandı</span>
+                    {% else %}
+                        <span class="badge bg-warning">Tamamlanmadı</span>
+                    {% endif %}
+                </span>
+                    <p>{{ phone.phone_date|date:"d F D" }}</p>
+            </div>
+        </div>
+    </div>
+</div>

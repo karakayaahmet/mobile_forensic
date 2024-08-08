@@ -1,0 +1,44 @@
+{#{% if messages %}#}
+{#    <ul class="container-fluid p-0 m-0">#}
+{#        {% for message in messages %}#}
+{#            <div class="alert {{ message.tags }} alert-dismissible fade show mb-0 text-center">#}
+{#                {{ message }}#}
+{#                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>#}
+{#            </div>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+{#{% endif %}#}
+
+<!-- templates/your_template.html -->
+{% if messages %}
+<script>
+    let djangoMessages = [];
+    {% for message in messages %}
+    djangoMessages.push({"level": "{{ message.tags }}", "message": "{{ message }}", "extra_tags": "{{ message.extra_tags }}"});
+    {% endfor %}
+</script>
+{% endif %}
+
+<script>
+    if (djangoMessages.length > 0) {
+        djangoMessages.forEach(function(msg) {
+            var messageBox = document.createElement("div");
+            messageBox.className = `alert ${msg.level} alert-dismissible fade show mb-0 text-center`; // Özelleştirilmiş classlar
+            messageBox.innerHTML = `${msg.message} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+            
+            // Özelleştirme: Mesaj kutusunu sayfanın sağ alt köşesine yerleştirin
+            messageBox.style.position = "fixed";
+            messageBox.style.right = "20px";
+            messageBox.style.bottom = "20px";
+            messageBox.style.zIndex = "1000";
+            document.body.appendChild(messageBox);
+
+            // Otomatik kapanma süresi
+            setTimeout(function() {
+                $(messageBox).fadeOut('slow', function() {
+                    this.remove();
+                });
+            }, 5000); // 5 saniye sonra kaldır
+        });
+    }
+</script>

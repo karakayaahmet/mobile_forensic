@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Anasayfa | Mobil Cihaz Adli Analizi Platformu</title>
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="hero-section" style="background: url('{% static 'images/mobile-analysis-home.png' %}') no-repeat center center; background-size: cover;">
+            <div class="overlay">
+                <div class="hero-content py-5">
+                    <h1 class="display-4">Mobil Cihaz Adli Analizi</h1>
+                    <p class="lead">Mobil cihazlarınızdan adli veri toplama ve analiz etme konusunda uzman çözümler.</p>
+                    <a href="#features" class="btn btn-primary btn-lg">Hizmetlerimizi Keşfedin</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-section py-5" id="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-box p-4">
+                            <img src="{% static 'images/analysis.png' %}" alt="Veri Kurtarma" class="img-fluid">
+                            <h3>Veri Kurtarma</h3>
+                            <p>Silinmiş mesajlar, çağrı kayıtları ve fotoğraflar dahil olmak üzere kayıp verilerinizi kurtarın.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-box p-4">
+                            <img src="{% static 'images/analysis.png' %}" alt="Güvenlik Analizi" class="img-fluid">
+                            <h3>Güvenlik Analizi</h3>
+                            <p>Cihazınızdaki güvenlik açıklarını tespit edin ve kişisel bilgilerinizi koruyun.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="feature-box p-4">
+                            <img src="{% static 'images/analysis.png' %}" alt="Uzman Destek" class="img-fluid">
+                            <h3>Uzman Destek</h3>
+                            <p>Adli bilişim konusunda deneyimli ekibimizle her türlü sorununuzda yanınızdayız.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="call-to-action py-5 text-white text-center" style="background-color: #007bff;">
+            <h2 class="mb-4">Profesyonel Yardıma mı İhtiyacınız Var?</h2>
+            <p class="mb-4">Mobil cihaz adli analizinde uzman çözümlerimizle yanınızdayız.</p>
+            <a href="{% url 'user_login' %}" class="btn btn-light btn-lg">Hemen Başvurun</a>
+        </div>
+    </div>
+{% endblock %}

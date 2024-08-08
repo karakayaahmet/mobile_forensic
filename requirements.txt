@@ -1,0 +1,10 @@
+asgiref==3.7.2
+backports.zoneinfo @ file:///opt/conda/conda-bld/backports.zoneinfo_1661287532800/work
+beautifulsoup4==4.12.3
+Django==4.2.10
+django-ckeditor==6.7.1
+django-js-asset==2.2.0
+pillow==10.2.0
+soupsieve==2.5
+sqlparse @ file:///croot/sqlparse_1690901927333/work
+typing_extensions @ file:///croot/typing_extensions_1705599297034/work

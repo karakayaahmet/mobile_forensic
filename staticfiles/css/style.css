@@ -1,0 +1,49 @@
+.errorlist {
+    list-style-type: none;
+    color: red;
+    margin: 0;
+    padding: 0;
+}
+
+.invalid input, .invalid textarea {
+    border-color: #dc3545;
+}
+
+.hero-section {
+    color: white;
+    text-align: center;
+    min-height: 600px; /* Bu değeri ihtiyacınıza göre ayarlayabilirsiniz */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Arka plan için hafif bir opaklık */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2; /* Overlay'in üzerinde gözükmesini sağlar */
+}
+
+/* Metin üzerine gölge efekti */
+.hero-content h1, .hero-content p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Örneğin, bu kodu static dosyalarınızın içindeki bir CSS dosyasına ekleyebilirsiniz */
+
+/* Görüntüleri içeren div için stil tanımı */
+.file-details {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc; /* İsteğe bağlı çerçeve */
+    padding: 5px; /* İsteğe bağlı iç boşluk */
+}

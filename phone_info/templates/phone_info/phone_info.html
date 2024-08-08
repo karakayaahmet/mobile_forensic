@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+<title>Phone Info</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Phone Information</h1>
+
+        {% if phone_info %}
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Komut</th>
+                        <th scope="col">Sonuç</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in phone_info.items %}
+                        <tr>
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="alert alert-danger">Telefon bilgileri alınamadı.</p>
+        {% endif %}
+    </div>
+{% endblock %}

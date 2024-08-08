@@ -1,0 +1,77 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-sm table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width:120px"></th>
+                        <th>Phone Name</th>
+                        <th>Slug</th>
+                        <th style="width:70px">Edit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for phone in phones %}
+                        <tr>
+                            <td>
+                                {% if phone.phone_image %}
+                                    <img src="{{ phone.phone_image.url }}" alt="{{ phone.name }}" class="img-fluid"
+                                         width="60" height="60">
+                                {% else %}
+                                    <img src="{% static 'images/phones/apple.png' %}" class="card-img-top"
+                                         alt="{{ phone.phone_name }}" style="width: 100px; height: 100px;">
+                                {% endif %}
+
+                            </td>
+                            <td>{{ phone.phone_name }}</td>
+                            <td>{{ phone.slug }}</td>
+                            <td>
+                                <a href="{% url 'phone_edit' phone.id %}" class="btn btn-info btn-sm">Edit</a>
+                                {#                                <a href="{% url 'phone_delete' phone.id %}" class="btn btn-danger btn-sm">Delete</a>#}
+                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                        data-target="#deleteModal{{ phone.id }}">Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Modal Yapısı -->
+                        <div class="modal fade" id="deleteModal{{ phone.id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="modelTitleId{{ phone.id }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Telefonu Sil</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>{{ phone.phone_name }}</strong> isimli telefonu silmek istiyor
+                                            musunuz?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{% url 'phone_delete' phone.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Evet</button>
+                                        </form>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
